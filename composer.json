@@ -1,0 +1,19 @@
+{
+	"name": "jpuck/dmetl",
+	"description": "Extract Digital Measures REST XML and Load into SQL Server Database",
+	"license": "GPL-3.0+",
+	"authors": [
+		{
+			"name": "Jeff Puckett",
+			"email": "JPuckett@walton.uark.edu"
+		}
+	],
+	"require": {
+		"jpuck/etl": "0.3.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"jpuck\\dmetl\\": "src/"
+		}
+	}
+}

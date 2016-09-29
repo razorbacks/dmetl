@@ -1,0 +1,4 @@
+/vendor/
+digitalMeasuresCredentials.php
+pdo.php
+schema.serialized.php
