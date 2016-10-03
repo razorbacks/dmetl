@@ -19,10 +19,9 @@ Requires PHP7 and [Microsoft's ODBC Driver][6].
 
 If you're running Ubuntu 16.04, then helpful installers are included.
 
-    sudo su
-    ./install/1.php7.bash
-    ./install/2.mssql.odbc.driver.php7.bash
-    ./install/3.composer.bash
+    sudo ./install/1.php7.bash
+    sudo ./install/2.mssql.odbc.driver.php7.bash
+    sudo ./install/3.composer.bash
     composer install
 
 Copy the example files and update the credentials for Digital Measures
