@@ -48,7 +48,7 @@ in the database, you need to run the replace script.
 Use a task scheduler to regularly update your data. Here's an example using
 [cron][12] that will run every day at 3:07AM.
 
-    7 3 * * * /usr/bin/php /path/to/dmetl/scripts/replaceData.php > /path/to/dmetl/log.txt >/dev/null 2>&1
+    7 3 * * * /usr/bin/php /path/to/dmetl/scripts/replaceData.php > /path/to/dmetl/log.txt 2>&1
 
   [1]:https://helpdesk.walton.uark.edu/userui/ticket.php?ID=21500
   [2]:https://www.digitalmeasures.com/login/dashboard/Digital%20Measures%20-%20Web%20Services%20v4.pdf
