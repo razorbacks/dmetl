@@ -2,3 +2,4 @@
 digitalMeasuresCredentials.php
 pdo.php
 schema.serialized.php
+data/email.php

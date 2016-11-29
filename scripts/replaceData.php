@@ -6,6 +6,23 @@ use jpuck\etl\Sources\DBMS\MicrosoftSQLServer;
 use jpuck\etl\Data\XML;
 use jpuck\etl\Schemata\Schema;
 use jpuck\dmetl\Console;
+use jpuck\phpdev\ConfigurationContainer as conf;
+use jpuck\phpdev\Functions as jp;
+
+jp::ErrorsToExceptions();
+
+conf::load("$root/data/email.php");
+conf::closures($get, $set);
+
+set_exception_handler(function($exception) use ($get){
+	$get('mailer')->send(Swift_Message::newInstance('EXCEPTION THROWN DMDW')
+		->setFrom($get('emailFrom'))
+		->setTo($get('emailTo'))
+		->setBody($exception)
+	);
+
+	throw $exception;
+});
 
 $datasets = require "$root/data/datasets.php";
 $schema   = new Schema(file_get_contents("$root/data/schema.json"));

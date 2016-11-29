@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6af846d6a7991cc3c56f0696a5b63376",
-    "content-hash": "82563c0cdef289241d534e7fb6eb7944",
+    "hash": "83501eda2335ef290b062488058a0a49",
+    "content-hash": "3a33b13bada4fb58eb4f0e79fb60e9ae",
     "packages": [
         {
             "name": "jpuck/etl",
@@ -53,16 +53,16 @@
         },
         {
             "name": "jpuck/phpdev",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jpuck/phpdev.git",
-                "reference": "6a1c33897ed8278f1fab8dd55e4d46b1d77ff24c"
+                "reference": "dae6b5c416e5e92fceae53fd26af4c96077d4ca7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jpuck/phpdev/zipball/6a1c33897ed8278f1fab8dd55e4d46b1d77ff24c",
-                "reference": "6a1c33897ed8278f1fab8dd55e4d46b1d77ff24c",
+                "url": "https://api.github.com/repos/jpuck/phpdev/zipball/dae6b5c416e5e92fceae53fd26af4c96077d4ca7",
+                "reference": "dae6b5c416e5e92fceae53fd26af4c96077d4ca7",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 }
             ],
             "description": "A collection of classes useful for code under construction.",
-            "time": "2016-11-29 17:26:35"
+            "time": "2016-11-29 21:52:31"
         },
         {
             "name": "sabre/uri",
@@ -203,6 +203,59 @@
                 "xml"
             ],
             "time": "2016-10-09 22:57:52"
+        },
+        {
+            "name": "swiftmailer/swiftmailer",
+            "version": "v5.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swiftmailer/swiftmailer.git",
+                "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+                "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "lib/swift_required.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Corbyn"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Swiftmailer, free feature-rich PHP mailer",
+            "homepage": "http://swiftmailer.org",
+            "keywords": [
+                "email",
+                "mail",
+                "mailer"
+            ],
+            "time": "2016-11-24 01:01:23"
         }
     ],
     "packages-dev": [],
