@@ -24,10 +24,12 @@ If you're running Ubuntu 16.04, then helpful installers are included.
     sudo ./install/3.composer.bash
     composer install
 
-Copy the example files and update the credentials for Digital Measures
-`data/digitalMeasuresCredentials.php` and MSSQL `data/pdo.php`
+Copy the `example` files and update the credentials for:
 
-Update the `data/datasets.php` list of REST endpoints you want to extract.
+1. Digital Measures `data/digitalMeasuresCredentials.php`
+2. Microsoft SQL Server `data/pdo.php`
+3. REST endpoints you want to extract `data/datasets.php`
+4. Email credentials for error reporting `data/email.php`
 
 ## Getting Started
 
