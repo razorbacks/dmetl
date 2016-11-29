@@ -2,12 +2,13 @@
 $root = __DIR__.'/..';
 require_once "$root/vendor/autoload.php";
 use jpuck\etl\Sources\REST;
-use jpuck\etl\Sources\DB;
+use jpuck\etl\Sources\DBMS\MicrosoftSQLServer;
 use jpuck\etl\Data\XML;
+use jpuck\etl\Schemata\Schema;
 use jpuck\dmetl\Console;
 
 $datasets = require "$root/data/datasets.php";
-$schema   = unserialize(file_get_contents("$root/data/schema.serialized.php"));
+$schema   = new Schema(file_get_contents("$root/data/schema.json"));
 $database = require "$root/data/pdo.php";
 $console = new Console($datasets);
 
@@ -17,8 +18,7 @@ $console->output("done\n");
 
 // insert into temp
 $source = new REST(require "$root/data/digitalMeasuresCredentials.php");
-$destination = new DB($database, ['prefix'=>'tmp']);
-$destination->debug(true);
+$destination = new MicrosoftSQLServer($database, ['prefix'=>'tmp']);
 
 foreach ($datasets as $endpoint){
 	$console->output('extracting',$endpoint);

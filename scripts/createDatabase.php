@@ -27,7 +27,7 @@ foreach ($datasets as $endpoint){
 	$console->output("merged\n");
 }
 
-file_put_contents("$root/data/schema.serialized.php", serialize($schema));
+file_put_contents("$root/data/schema.json", $schema);
 
 $db  = new NVarcharMax;
 $sql = $db->toSQL($schema);

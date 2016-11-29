@@ -1,6 +1,6 @@
 <?php
 namespace jpuck\dmetl;
-use jpuck\etl\Schemata\DBMS\MicrosoftSQLServer;
+use jpuck\etl\Sources\DBMS\MicrosoftSQLServer;
 
 class NVarcharMax extends MicrosoftSQLServer {
 	public function getVarchar ($length = null) : String {
@@ -9,7 +9,9 @@ class NVarcharMax extends MicrosoftSQLServer {
 		}
 
 		if (!is_int($length) || $length < 0){
-			throw new InvalidArgumentException("$length is not a positive integer.");
+			throw new InvalidArgumentException(
+				"$length is not a positive integer."
+			);
 		}
 
 		if ($length > 100){
