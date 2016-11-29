@@ -15,6 +15,18 @@ IF (
 	EXISTS (
 		SELECT *
 		FROM INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_NAME = 'tmpDataRecordPRESENT_EDUCATIONALMISSION'
+		-- AND TABLE_SCHEMA = 'dbo'
+	)
+)
+BEGIN
+	DROP TABLE [tmpDataRecordPRESENT_EDUCATIONALMISSION];
+END
+
+IF (
+	EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.TABLES
 		WHERE TABLE_NAME = 'tmpDataRecordEDITREVEDITREV_AUTH'
 		-- AND TABLE_SCHEMA = 'dbo'
 	)
@@ -345,6 +357,18 @@ IF (
 )
 BEGIN
 	DROP TABLE [DataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH];
+END
+
+IF (
+	EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_NAME = 'DataRecordPRESENT_EDUCATIONALMISSION'
+		-- AND TABLE_SCHEMA = 'dbo'
+	)
+)
+BEGIN
+	DROP TABLE [DataRecordPRESENT_EDUCATIONALMISSION];
 END
 
 IF (
@@ -682,7 +706,7 @@ IF (
 BEGIN
 	CREATE TABLE [tmpData] (
 		[date] datetime,
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -696,15 +720,15 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecord] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecord
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpData](jpetl_id),
 		[userId] int,
 		[username] nvarchar(255),
 		[termId] tinyint,
 		[surveyId] int,
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -718,15 +742,15 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordIndexEntry] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordIndexEntry
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[indexKey] nvarchar(255),
 		[entryKey] nvarchar(255),
 		[text] nvarchar(255),
 		[IndexEntry] nvarchar(MAX),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -740,9 +764,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordADMIN] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordADMIN
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -780,7 +804,7 @@ BEGIN
 		[TERM_END] datetime,
 		[TERM_START] datetime,
 		[AACSBTCLASS] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -794,12 +818,12 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordADMINNPRESP] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordADMINNPRESP
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordADMIN](jpetl_id),
 		[NPRESP] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -813,14 +837,14 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordADMINADMIN_DEP] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordADMINADMIN_DEP
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordADMIN](jpetl_id),
 		[id] bigint,
 		[primaryKey] nvarchar(255),
 		[DEP] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -834,9 +858,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordAACSB_NARRATIVES] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordAACSB_NARRATIVES
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -852,7 +876,7 @@ BEGIN
 		[STATEMENT] nvarchar(MAX),
 		[AACSBSUFF] nvarchar(255),
 		[AACSBSUFF_JUST] nvarchar(MAX),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -866,12 +890,12 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordAACSB_NARRATIVESACTIVITY_MATRIX] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordAACSB_NARRATIVESACTIVITY_MATRIX
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordAACSB_NARRATIVES](jpetl_id),
 		[ACTIVITY_MATRIX] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -885,9 +909,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordWORKLOAD] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordWORKLOAD
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -917,7 +941,7 @@ BEGIN
 		[APPROVE_START] datetime,
 		[APPROVE_END] datetime,
 		[USER_REFERENCE_CREATOR] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -931,13 +955,13 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordWORKLOADWORKLOAD_DEP] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordWORKLOADWORKLOAD_DEP
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordWORKLOAD](jpetl_id),
 		[id] bigint,
 		[DEP] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -951,14 +975,14 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordWORKLOADWORKLOAD_FILES] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordWORKLOADWORKLOAD_FILES
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordWORKLOAD](jpetl_id),
 		[id] bigint,
 		[UPLOAD_SIGNED_FORM] nvarchar(255),
 		[UPLOAD_PLAN] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -972,9 +996,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordSCHTEACH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordSCHTEACH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -983,10 +1007,6 @@ BEGIN
 		[primaryKey] nvarchar(255),
 		[TYT_TERM] nvarchar(255),
 		[CASE_ANALYSIS] nvarchar(MAX),
-		[GPA_MEAN] decimal(15,14),
-		[TEST_TYPE] nvarchar(255),
-		[ESSAY_PROBLEM_SOLVING] nvarchar(255),
-		[MULTIPLE_CHOICE_TRUE_FALSE] nvarchar(255),
 		[NEWPREP] nvarchar(255),
 		[NEWFORM] nvarchar(255),
 		[MEAN_CORE_QUESTIONS] nvarchar(255),
@@ -994,12 +1014,12 @@ BEGIN
 		[PEDINN] nvarchar(MAX),
 		[CHANGE_TOPIC_COVERAGE] nvarchar(MAX),
 		[COMPUTER_WORK] nvarchar(MAX),
+		[DEP_MEDIAN] decimal(3,2),
 		[PRESENTATIONS] nvarchar(MAX),
-		[DEP_MEAN] decimal(10,9),
 		[WRITTEN_REPORTS] nvarchar(MAX),
 		[TERM_PAPERS] nvarchar(MAX),
-		[TEAM_PROJECTS_ACTIVITIES] nvarchar(MAX),
 		[PROBLEM_SETS] nvarchar(MAX),
+		[TEAM_PROJECTS_ACTIVITIES] nvarchar(MAX),
 		[INTERNATIONAL_TOPICS] nvarchar(MAX),
 		[ETHICS] nvarchar(MAX),
 		[OTHER] nvarchar(MAX),
@@ -1007,14 +1027,14 @@ BEGIN
 		[LEARNING_ASSURANCE_PROGRAM] nvarchar(MAX),
 		[ADDITIONAL_INFORMATION] nvarchar(MAX),
 		[SYLLABUS] nvarchar(MAX),
-		[DEP_MEDIAN] decimal(3,2),
-		[COLLEGE_MEDIAN] decimal(3,2),
+		[GPA_MEAN] decimal(15,14),
+		[DELIVERY_MODE] nvarchar(255),
+		[TEST_TYPE] nvarchar(255),
+		[ESSAY_PROBLEM_SOLVING] nvarchar(255),
+		[MULTIPLE_CHOICE_TRUE_FALSE] nvarchar(255),
+		[DEP_MEAN] decimal(10,9),
 		[TYY_TERM] smallint,
-		[STEARNA] tinyint,
-		[TERM_START] datetime,
-		[TERM_END] datetime,
-		[TITLE] nvarchar(255),
-		[COURSEPRE] nvarchar(255),
+		[STEARNCR] tinyint,
 		[COURSENUM] smallint,
 		[COURSENUM_SUFFIX] nvarchar(255),
 		[SECTION] nvarchar(255),
@@ -1023,11 +1043,11 @@ BEGIN
 		[SSCH] smallint,
 		[CHOURS] decimal(14,12),
 		[STEARNB] smallint,
-		[COLLEGE_MEAN] decimal(10,9),
+		[STEARNA] tinyint,
 		[STEARNC] tinyint,
 		[STEARND] tinyint,
 		[STEARNF] tinyint,
-		[STEARNCR] tinyint,
+		[COLLEGE_MEDIAN] decimal(3,2),
 		[STEARNI] tinyint,
 		[STEARNR] tinyint,
 		[STEARNW] tinyint,
@@ -1035,8 +1055,13 @@ BEGIN
 		[STEARNS] smallint,
 		[UNIV_CORE_MEAN] decimal(10,9),
 		[UNIV_CORE_MEDIAN] decimal(3,2),
+		[COLLEGE_MEAN] decimal(10,9),
+		[TERM_START] datetime,
+		[TERM_END] datetime,
+		[TITLE] nvarchar(255),
+		[COURSEPRE] nvarchar(255),
 		[EVAL_FILE] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1050,9 +1075,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordINTELLCONT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordINTELLCONT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1120,7 +1145,7 @@ BEGIN
 		[YR_PERFORMANCE_REPORT] smallint,
 		[INCLUDE_AFPR] nvarchar(255),
 		[USER_REFERENCE_CREATOR] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1134,9 +1159,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordINTELLCONTINTELLCONT_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordINTELLCONTINTELLCONT_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordINTELLCONT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -1145,7 +1170,7 @@ BEGIN
 		[LNAME] nvarchar(255),
 		[ISSTUDENT] nvarchar(255),
 		[DISPLAY] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1159,9 +1184,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordINTELLCONTINTELLCONT_EDITOR] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordINTELLCONTINTELLCONT_EDITOR
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordINTELLCONT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -1169,7 +1194,7 @@ BEGIN
 		[MNAME] nvarchar(255),
 		[LNAME] nvarchar(255),
 		[DISPLAY] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1183,12 +1208,12 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordINTELLCONTMISSION] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordINTELLCONTMISSION
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordINTELLCONT](jpetl_id),
 		[MISSION] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1202,12 +1227,12 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordINTELLCONTRESEARCH_CENTER] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordINTELLCONTRESEARCH_CENTER
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordINTELLCONT](jpetl_id),
 		[RESEARCH_CENTER] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1221,9 +1246,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordCONGRANT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordCONGRANT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1257,7 +1282,7 @@ BEGIN
 		[CLASSIFICATION] nvarchar(255),
 		[AWARDORG] nvarchar(255),
 		[USER_REFERENCE_CREATOR] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1271,9 +1296,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordCONGRANTCONGRANT_INVEST] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordCONGRANTCONGRANT_INVEST
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordCONGRANT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -1281,7 +1306,7 @@ BEGIN
 		[MNAME] nvarchar(255),
 		[LNAME] nvarchar(255),
 		[ROLE] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1295,9 +1320,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordPRESENT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordPRESENT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1334,7 +1359,7 @@ BEGIN
 		[DATE_END] datetime,
 		[ABSTRACT] nvarchar(MAX),
 		[USER_REFERENCE_CREATOR] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1348,9 +1373,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordPRESENTPRESENT_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordPRESENTPRESENT_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordPRESENT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -1358,7 +1383,7 @@ BEGIN
 		[MNAME] nvarchar(255),
 		[LNAME] nvarchar(255),
 		[ROLE] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1372,12 +1397,12 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordPRESENTMISSION] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordPRESENTMISSION
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordPRESENT](jpetl_id),
 		[MISSION] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1391,9 +1416,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordCONSULT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordCONSULT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1415,7 +1440,7 @@ BEGIN
 		[DTY_END] smallint,
 		[END_START] datetime,
 		[END_END] datetime,
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1429,9 +1454,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordEDITREV] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordEDITREV
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1459,7 +1484,7 @@ BEGIN
 		[END_START] datetime,
 		[END_END] datetime,
 		[USER_REFERENCE_CREATOR] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1473,16 +1498,16 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordEDITREVEDITREV_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordEDITREVEDITREV_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordEDITREV](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
 		[FNAME] nvarchar(255),
 		[MNAME] nvarchar(255),
 		[LNAME] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1496,9 +1521,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordGENSERVE] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordGENSERVE
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1526,7 +1551,7 @@ BEGIN
 		[ROLE] nvarchar(255),
 		[ORG] nvarchar(MAX),
 		[UPLOAD_FILE] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1540,9 +1565,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordPRESENT_EDUCATIONAL] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordPRESENT_EDUCATIONAL
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1577,8 +1602,7 @@ BEGIN
 		[DTY_ACC] smallint,
 		[ACC_START] datetime,
 		[ACC_END] datetime,
-		[MISSION] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1592,9 +1616,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [tmpDataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_tmpDataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [tmpDataRecordPRESENT_EDUCATIONAL](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -1602,7 +1626,26 @@ BEGIN
 		[MNAME] nvarchar(255),
 		[LNAME] nvarchar(255),
 		[ROLE] nvarchar(255),
-		jpetl_id int IDENTITY PRIMARY KEY
+		jpetl_id int  PRIMARY KEY
+	);
+END
+
+IF (
+	NOT EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_NAME = 'tmpDataRecordPRESENT_EDUCATIONALMISSION'
+		-- AND TABLE_SCHEMA = 'dbo'
+	)
+)
+BEGIN
+	CREATE TABLE [tmpDataRecordPRESENT_EDUCATIONALMISSION] (
+		jpetl_idfk int,
+		CONSTRAINT fk_tmpDataRecordPRESENT_EDUCATIONALMISSION
+			FOREIGN KEY (jpetl_idfk)
+			REFERENCES [tmpDataRecordPRESENT_EDUCATIONAL](jpetl_id),
+		[MISSION] nvarchar(255),
+		jpetl_id int  PRIMARY KEY
 	);
 END
 
@@ -1631,9 +1674,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecord] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecord
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [Data](jpetl_id),
 		[userId] int,
 		[username] nvarchar(255),
@@ -1653,9 +1696,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordIndexEntry] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordIndexEntry
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[indexKey] nvarchar(255),
 		[entryKey] nvarchar(255),
@@ -1675,9 +1718,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordADMIN] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordADMIN
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1729,9 +1772,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordADMINNPRESP] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordADMINNPRESP
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordADMIN](jpetl_id),
 		[NPRESP] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
@@ -1748,9 +1791,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordADMINADMIN_DEP] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordADMINADMIN_DEP
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordADMIN](jpetl_id),
 		[id] bigint,
 		[primaryKey] nvarchar(255),
@@ -1769,9 +1812,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordAACSB_NARRATIVES] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordAACSB_NARRATIVES
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1801,9 +1844,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordAACSB_NARRATIVESACTIVITY_MATRIX] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordAACSB_NARRATIVESACTIVITY_MATRIX
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordAACSB_NARRATIVES](jpetl_id),
 		[ACTIVITY_MATRIX] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
@@ -1820,9 +1863,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordWORKLOAD] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordWORKLOAD
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1866,9 +1909,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordWORKLOADWORKLOAD_DEP] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordWORKLOADWORKLOAD_DEP
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordWORKLOAD](jpetl_id),
 		[id] bigint,
 		[DEP] nvarchar(255),
@@ -1886,9 +1929,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordWORKLOADWORKLOAD_FILES] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordWORKLOADWORKLOAD_FILES
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordWORKLOAD](jpetl_id),
 		[id] bigint,
 		[UPLOAD_SIGNED_FORM] nvarchar(255),
@@ -1907,9 +1950,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordSCHTEACH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordSCHTEACH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -1918,10 +1961,6 @@ BEGIN
 		[primaryKey] nvarchar(255),
 		[TYT_TERM] nvarchar(255),
 		[CASE_ANALYSIS] nvarchar(MAX),
-		[GPA_MEAN] decimal(15,14),
-		[TEST_TYPE] nvarchar(255),
-		[ESSAY_PROBLEM_SOLVING] nvarchar(255),
-		[MULTIPLE_CHOICE_TRUE_FALSE] nvarchar(255),
 		[NEWPREP] nvarchar(255),
 		[NEWFORM] nvarchar(255),
 		[MEAN_CORE_QUESTIONS] nvarchar(255),
@@ -1929,12 +1968,12 @@ BEGIN
 		[PEDINN] nvarchar(MAX),
 		[CHANGE_TOPIC_COVERAGE] nvarchar(MAX),
 		[COMPUTER_WORK] nvarchar(MAX),
+		[DEP_MEDIAN] decimal(3,2),
 		[PRESENTATIONS] nvarchar(MAX),
-		[DEP_MEAN] decimal(10,9),
 		[WRITTEN_REPORTS] nvarchar(MAX),
 		[TERM_PAPERS] nvarchar(MAX),
-		[TEAM_PROJECTS_ACTIVITIES] nvarchar(MAX),
 		[PROBLEM_SETS] nvarchar(MAX),
+		[TEAM_PROJECTS_ACTIVITIES] nvarchar(MAX),
 		[INTERNATIONAL_TOPICS] nvarchar(MAX),
 		[ETHICS] nvarchar(MAX),
 		[OTHER] nvarchar(MAX),
@@ -1942,14 +1981,14 @@ BEGIN
 		[LEARNING_ASSURANCE_PROGRAM] nvarchar(MAX),
 		[ADDITIONAL_INFORMATION] nvarchar(MAX),
 		[SYLLABUS] nvarchar(MAX),
-		[DEP_MEDIAN] decimal(3,2),
-		[COLLEGE_MEDIAN] decimal(3,2),
+		[GPA_MEAN] decimal(15,14),
+		[DELIVERY_MODE] nvarchar(255),
+		[TEST_TYPE] nvarchar(255),
+		[ESSAY_PROBLEM_SOLVING] nvarchar(255),
+		[MULTIPLE_CHOICE_TRUE_FALSE] nvarchar(255),
+		[DEP_MEAN] decimal(10,9),
 		[TYY_TERM] smallint,
-		[STEARNA] tinyint,
-		[TERM_START] datetime,
-		[TERM_END] datetime,
-		[TITLE] nvarchar(255),
-		[COURSEPRE] nvarchar(255),
+		[STEARNCR] tinyint,
 		[COURSENUM] smallint,
 		[COURSENUM_SUFFIX] nvarchar(255),
 		[SECTION] nvarchar(255),
@@ -1958,11 +1997,11 @@ BEGIN
 		[SSCH] smallint,
 		[CHOURS] decimal(14,12),
 		[STEARNB] smallint,
-		[COLLEGE_MEAN] decimal(10,9),
+		[STEARNA] tinyint,
 		[STEARNC] tinyint,
 		[STEARND] tinyint,
 		[STEARNF] tinyint,
-		[STEARNCR] tinyint,
+		[COLLEGE_MEDIAN] decimal(3,2),
 		[STEARNI] tinyint,
 		[STEARNR] tinyint,
 		[STEARNW] tinyint,
@@ -1970,6 +2009,11 @@ BEGIN
 		[STEARNS] smallint,
 		[UNIV_CORE_MEAN] decimal(10,9),
 		[UNIV_CORE_MEDIAN] decimal(3,2),
+		[COLLEGE_MEAN] decimal(10,9),
+		[TERM_START] datetime,
+		[TERM_END] datetime,
+		[TITLE] nvarchar(255),
+		[COURSEPRE] nvarchar(255),
 		[EVAL_FILE] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
 	);
@@ -1985,9 +2029,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordINTELLCONT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordINTELLCONT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -2069,9 +2113,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordINTELLCONTINTELLCONT_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordINTELLCONTINTELLCONT_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordINTELLCONT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -2094,9 +2138,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordINTELLCONTINTELLCONT_EDITOR] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordINTELLCONTINTELLCONT_EDITOR
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordINTELLCONT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -2118,9 +2162,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordINTELLCONTMISSION] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordINTELLCONTMISSION
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordINTELLCONT](jpetl_id),
 		[MISSION] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
@@ -2137,9 +2181,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordINTELLCONTRESEARCH_CENTER] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordINTELLCONTRESEARCH_CENTER
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordINTELLCONT](jpetl_id),
 		[RESEARCH_CENTER] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
@@ -2156,9 +2200,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordCONGRANT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordCONGRANT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -2206,9 +2250,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordCONGRANTCONGRANT_INVEST] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordCONGRANTCONGRANT_INVEST
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordCONGRANT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -2230,9 +2274,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordPRESENT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordPRESENT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -2283,9 +2327,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordPRESENTPRESENT_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordPRESENTPRESENT_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordPRESENT](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -2307,9 +2351,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordPRESENTMISSION] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordPRESENTMISSION
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordPRESENT](jpetl_id),
 		[MISSION] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
@@ -2326,9 +2370,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordCONSULT] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordCONSULT
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -2364,9 +2408,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordEDITREV] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordEDITREV
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -2408,9 +2452,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordEDITREVEDITREV_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordEDITREVEDITREV_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordEDITREV](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -2431,9 +2475,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordGENSERVE] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordGENSERVE
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -2475,9 +2519,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordPRESENT_EDUCATIONAL] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordPRESENT_EDUCATIONAL
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecord](jpetl_id),
 		[id] bigint,
 		[lastModified] datetime,
@@ -2512,7 +2556,6 @@ BEGIN
 		[DTY_ACC] smallint,
 		[ACC_START] datetime,
 		[ACC_END] datetime,
-		[MISSION] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
 	);
 END
@@ -2527,9 +2570,9 @@ IF (
 )
 BEGIN
 	CREATE TABLE [DataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH] (
-		jpetl_pid int,
+		jpetl_idfk int,
 		CONSTRAINT fk_DataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH
-			FOREIGN KEY (jpetl_pid)
+			FOREIGN KEY (jpetl_idfk)
 			REFERENCES [DataRecordPRESENT_EDUCATIONAL](jpetl_id),
 		[id] bigint,
 		[FACULTY_NAME] int,
@@ -2537,6 +2580,25 @@ BEGIN
 		[MNAME] nvarchar(255),
 		[LNAME] nvarchar(255),
 		[ROLE] nvarchar(255),
+		jpetl_id int  PRIMARY KEY
+	);
+END
+
+IF (
+	NOT EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_NAME = 'DataRecordPRESENT_EDUCATIONALMISSION'
+		-- AND TABLE_SCHEMA = 'dbo'
+	)
+)
+BEGIN
+	CREATE TABLE [DataRecordPRESENT_EDUCATIONALMISSION] (
+		jpetl_idfk int,
+		CONSTRAINT fk_DataRecordPRESENT_EDUCATIONALMISSION
+			FOREIGN KEY (jpetl_idfk)
+			REFERENCES [DataRecordPRESENT_EDUCATIONAL](jpetl_id),
+		[MISSION] nvarchar(255),
 		jpetl_id int  PRIMARY KEY
 	);
 END

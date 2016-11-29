@@ -8,14 +8,14 @@ INSERT INTO [Data] (
 FROM [tmpData];
 
 INSERT INTO [DataRecord] (
-	jpetl_pid,
+	jpetl_idfk,
 	[userId],
 	[username],
 	[termId],
 	[surveyId],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[userId],
 	[username],
 	[termId],
@@ -24,14 +24,14 @@ INSERT INTO [DataRecord] (
 FROM [tmpDataRecord];
 
 INSERT INTO [DataRecordIndexEntry] (
-	jpetl_pid,
+	jpetl_idfk,
 	[indexKey],
 	[entryKey],
 	[text],
 	[IndexEntry],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[indexKey],
 	[entryKey],
 	[text],
@@ -40,7 +40,7 @@ INSERT INTO [DataRecordIndexEntry] (
 FROM [tmpDataRecordIndexEntry];
 
 INSERT INTO [DataRecordADMIN] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -79,7 +79,7 @@ INSERT INTO [DataRecordADMIN] (
 	[AACSBTCLASS],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -120,23 +120,23 @@ INSERT INTO [DataRecordADMIN] (
 FROM [tmpDataRecordADMIN];
 
 INSERT INTO [DataRecordADMINNPRESP] (
-	jpetl_pid,
+	jpetl_idfk,
 	[NPRESP],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[NPRESP],
 	jpetl_id
 FROM [tmpDataRecordADMINNPRESP];
 
 INSERT INTO [DataRecordADMINADMIN_DEP] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[primaryKey],
 	[DEP],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[primaryKey],
 	[DEP],
@@ -144,7 +144,7 @@ INSERT INTO [DataRecordADMINADMIN_DEP] (
 FROM [tmpDataRecordADMINADMIN_DEP];
 
 INSERT INTO [DataRecordAACSB_NARRATIVES] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -161,7 +161,7 @@ INSERT INTO [DataRecordAACSB_NARRATIVES] (
 	[AACSBSUFF_JUST],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -180,17 +180,17 @@ INSERT INTO [DataRecordAACSB_NARRATIVES] (
 FROM [tmpDataRecordAACSB_NARRATIVES];
 
 INSERT INTO [DataRecordAACSB_NARRATIVESACTIVITY_MATRIX] (
-	jpetl_pid,
+	jpetl_idfk,
 	[ACTIVITY_MATRIX],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[ACTIVITY_MATRIX],
 	jpetl_id
 FROM [tmpDataRecordAACSB_NARRATIVESACTIVITY_MATRIX];
 
 INSERT INTO [DataRecordWORKLOAD] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -221,7 +221,7 @@ INSERT INTO [DataRecordWORKLOAD] (
 	[USER_REFERENCE_CREATOR],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -254,25 +254,25 @@ INSERT INTO [DataRecordWORKLOAD] (
 FROM [tmpDataRecordWORKLOAD];
 
 INSERT INTO [DataRecordWORKLOADWORKLOAD_DEP] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[DEP],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[DEP],
 	jpetl_id
 FROM [tmpDataRecordWORKLOADWORKLOAD_DEP];
 
 INSERT INTO [DataRecordWORKLOADWORKLOAD_FILES] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[UPLOAD_SIGNED_FORM],
 	[UPLOAD_PLAN],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[UPLOAD_SIGNED_FORM],
 	[UPLOAD_PLAN],
@@ -280,7 +280,7 @@ INSERT INTO [DataRecordWORKLOADWORKLOAD_FILES] (
 FROM [tmpDataRecordWORKLOADWORKLOAD_FILES];
 
 INSERT INTO [DataRecordSCHTEACH] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -288,10 +288,6 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[primaryKey],
 	[TYT_TERM],
 	[CASE_ANALYSIS],
-	[GPA_MEAN],
-	[TEST_TYPE],
-	[ESSAY_PROBLEM_SOLVING],
-	[MULTIPLE_CHOICE_TRUE_FALSE],
 	[NEWPREP],
 	[NEWFORM],
 	[MEAN_CORE_QUESTIONS],
@@ -299,12 +295,12 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[PEDINN],
 	[CHANGE_TOPIC_COVERAGE],
 	[COMPUTER_WORK],
+	[DEP_MEDIAN],
 	[PRESENTATIONS],
-	[DEP_MEAN],
 	[WRITTEN_REPORTS],
 	[TERM_PAPERS],
-	[TEAM_PROJECTS_ACTIVITIES],
 	[PROBLEM_SETS],
+	[TEAM_PROJECTS_ACTIVITIES],
 	[INTERNATIONAL_TOPICS],
 	[ETHICS],
 	[OTHER],
@@ -312,14 +308,14 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[LEARNING_ASSURANCE_PROGRAM],
 	[ADDITIONAL_INFORMATION],
 	[SYLLABUS],
-	[DEP_MEDIAN],
-	[COLLEGE_MEDIAN],
+	[GPA_MEAN],
+	[DELIVERY_MODE],
+	[TEST_TYPE],
+	[ESSAY_PROBLEM_SOLVING],
+	[MULTIPLE_CHOICE_TRUE_FALSE],
+	[DEP_MEAN],
 	[TYY_TERM],
-	[STEARNA],
-	[TERM_START],
-	[TERM_END],
-	[TITLE],
-	[COURSEPRE],
+	[STEARNCR],
 	[COURSENUM],
 	[COURSENUM_SUFFIX],
 	[SECTION],
@@ -328,11 +324,11 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[SSCH],
 	[CHOURS],
 	[STEARNB],
-	[COLLEGE_MEAN],
+	[STEARNA],
 	[STEARNC],
 	[STEARND],
 	[STEARNF],
-	[STEARNCR],
+	[COLLEGE_MEDIAN],
 	[STEARNI],
 	[STEARNR],
 	[STEARNW],
@@ -340,10 +336,15 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[STEARNS],
 	[UNIV_CORE_MEAN],
 	[UNIV_CORE_MEDIAN],
+	[COLLEGE_MEAN],
+	[TERM_START],
+	[TERM_END],
+	[TITLE],
+	[COURSEPRE],
 	[EVAL_FILE],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -351,10 +352,6 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[primaryKey],
 	[TYT_TERM],
 	[CASE_ANALYSIS],
-	[GPA_MEAN],
-	[TEST_TYPE],
-	[ESSAY_PROBLEM_SOLVING],
-	[MULTIPLE_CHOICE_TRUE_FALSE],
 	[NEWPREP],
 	[NEWFORM],
 	[MEAN_CORE_QUESTIONS],
@@ -362,12 +359,12 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[PEDINN],
 	[CHANGE_TOPIC_COVERAGE],
 	[COMPUTER_WORK],
+	[DEP_MEDIAN],
 	[PRESENTATIONS],
-	[DEP_MEAN],
 	[WRITTEN_REPORTS],
 	[TERM_PAPERS],
-	[TEAM_PROJECTS_ACTIVITIES],
 	[PROBLEM_SETS],
+	[TEAM_PROJECTS_ACTIVITIES],
 	[INTERNATIONAL_TOPICS],
 	[ETHICS],
 	[OTHER],
@@ -375,14 +372,14 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[LEARNING_ASSURANCE_PROGRAM],
 	[ADDITIONAL_INFORMATION],
 	[SYLLABUS],
-	[DEP_MEDIAN],
-	[COLLEGE_MEDIAN],
+	[GPA_MEAN],
+	[DELIVERY_MODE],
+	[TEST_TYPE],
+	[ESSAY_PROBLEM_SOLVING],
+	[MULTIPLE_CHOICE_TRUE_FALSE],
+	[DEP_MEAN],
 	[TYY_TERM],
-	[STEARNA],
-	[TERM_START],
-	[TERM_END],
-	[TITLE],
-	[COURSEPRE],
+	[STEARNCR],
 	[COURSENUM],
 	[COURSENUM_SUFFIX],
 	[SECTION],
@@ -391,11 +388,11 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[SSCH],
 	[CHOURS],
 	[STEARNB],
-	[COLLEGE_MEAN],
+	[STEARNA],
 	[STEARNC],
 	[STEARND],
 	[STEARNF],
-	[STEARNCR],
+	[COLLEGE_MEDIAN],
 	[STEARNI],
 	[STEARNR],
 	[STEARNW],
@@ -403,12 +400,17 @@ INSERT INTO [DataRecordSCHTEACH] (
 	[STEARNS],
 	[UNIV_CORE_MEAN],
 	[UNIV_CORE_MEDIAN],
+	[COLLEGE_MEAN],
+	[TERM_START],
+	[TERM_END],
+	[TITLE],
+	[COURSEPRE],
 	[EVAL_FILE],
 	jpetl_id
 FROM [tmpDataRecordSCHTEACH];
 
 INSERT INTO [DataRecordINTELLCONT] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -477,7 +479,7 @@ INSERT INTO [DataRecordINTELLCONT] (
 	[USER_REFERENCE_CREATOR],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -548,7 +550,7 @@ INSERT INTO [DataRecordINTELLCONT] (
 FROM [tmpDataRecordINTELLCONT];
 
 INSERT INTO [DataRecordINTELLCONTINTELLCONT_AUTH] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -558,7 +560,7 @@ INSERT INTO [DataRecordINTELLCONTINTELLCONT_AUTH] (
 	[DISPLAY],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -570,7 +572,7 @@ INSERT INTO [DataRecordINTELLCONTINTELLCONT_AUTH] (
 FROM [tmpDataRecordINTELLCONTINTELLCONT_AUTH];
 
 INSERT INTO [DataRecordINTELLCONTINTELLCONT_EDITOR] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -579,7 +581,7 @@ INSERT INTO [DataRecordINTELLCONTINTELLCONT_EDITOR] (
 	[DISPLAY],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -590,27 +592,27 @@ INSERT INTO [DataRecordINTELLCONTINTELLCONT_EDITOR] (
 FROM [tmpDataRecordINTELLCONTINTELLCONT_EDITOR];
 
 INSERT INTO [DataRecordINTELLCONTMISSION] (
-	jpetl_pid,
+	jpetl_idfk,
 	[MISSION],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[MISSION],
 	jpetl_id
 FROM [tmpDataRecordINTELLCONTMISSION];
 
 INSERT INTO [DataRecordINTELLCONTRESEARCH_CENTER] (
-	jpetl_pid,
+	jpetl_idfk,
 	[RESEARCH_CENTER],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[RESEARCH_CENTER],
 	jpetl_id
 FROM [tmpDataRecordINTELLCONTRESEARCH_CENTER];
 
 INSERT INTO [DataRecordCONGRANT] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -645,7 +647,7 @@ INSERT INTO [DataRecordCONGRANT] (
 	[USER_REFERENCE_CREATOR],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -682,7 +684,7 @@ INSERT INTO [DataRecordCONGRANT] (
 FROM [tmpDataRecordCONGRANT];
 
 INSERT INTO [DataRecordCONGRANTCONGRANT_INVEST] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -691,7 +693,7 @@ INSERT INTO [DataRecordCONGRANTCONGRANT_INVEST] (
 	[ROLE],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -702,7 +704,7 @@ INSERT INTO [DataRecordCONGRANTCONGRANT_INVEST] (
 FROM [tmpDataRecordCONGRANTCONGRANT_INVEST];
 
 INSERT INTO [DataRecordPRESENT] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -740,7 +742,7 @@ INSERT INTO [DataRecordPRESENT] (
 	[USER_REFERENCE_CREATOR],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -780,7 +782,7 @@ INSERT INTO [DataRecordPRESENT] (
 FROM [tmpDataRecordPRESENT];
 
 INSERT INTO [DataRecordPRESENTPRESENT_AUTH] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -789,7 +791,7 @@ INSERT INTO [DataRecordPRESENTPRESENT_AUTH] (
 	[ROLE],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -800,17 +802,17 @@ INSERT INTO [DataRecordPRESENTPRESENT_AUTH] (
 FROM [tmpDataRecordPRESENTPRESENT_AUTH];
 
 INSERT INTO [DataRecordPRESENTMISSION] (
-	jpetl_pid,
+	jpetl_idfk,
 	[MISSION],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[MISSION],
 	jpetl_id
 FROM [tmpDataRecordPRESENTMISSION];
 
 INSERT INTO [DataRecordCONSULT] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -833,7 +835,7 @@ INSERT INTO [DataRecordCONSULT] (
 	[END_END],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -858,7 +860,7 @@ INSERT INTO [DataRecordCONSULT] (
 FROM [tmpDataRecordCONSULT];
 
 INSERT INTO [DataRecordEDITREV] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -887,7 +889,7 @@ INSERT INTO [DataRecordEDITREV] (
 	[USER_REFERENCE_CREATOR],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -918,7 +920,7 @@ INSERT INTO [DataRecordEDITREV] (
 FROM [tmpDataRecordEDITREV];
 
 INSERT INTO [DataRecordEDITREVEDITREV_AUTH] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -926,7 +928,7 @@ INSERT INTO [DataRecordEDITREVEDITREV_AUTH] (
 	[LNAME],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -936,7 +938,7 @@ INSERT INTO [DataRecordEDITREVEDITREV_AUTH] (
 FROM [tmpDataRecordEDITREVEDITREV_AUTH];
 
 INSERT INTO [DataRecordGENSERVE] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -965,7 +967,7 @@ INSERT INTO [DataRecordGENSERVE] (
 	[UPLOAD_FILE],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -996,7 +998,7 @@ INSERT INTO [DataRecordGENSERVE] (
 FROM [tmpDataRecordGENSERVE];
 
 INSERT INTO [DataRecordPRESENT_EDUCATIONAL] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -1030,10 +1032,9 @@ INSERT INTO [DataRecordPRESENT_EDUCATIONAL] (
 	[DTY_ACC],
 	[ACC_START],
 	[ACC_END],
-	[MISSION],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[lastModified],
 	[startDate],
@@ -1067,12 +1068,11 @@ INSERT INTO [DataRecordPRESENT_EDUCATIONAL] (
 	[DTY_ACC],
 	[ACC_START],
 	[ACC_END],
-	[MISSION],
 	jpetl_id
 FROM [tmpDataRecordPRESENT_EDUCATIONAL];
 
 INSERT INTO [DataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH] (
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -1081,7 +1081,7 @@ INSERT INTO [DataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH] (
 	[ROLE],
 	jpetl_id
 ) SELECT
-	jpetl_pid,
+	jpetl_idfk,
 	[id],
 	[FACULTY_NAME],
 	[FNAME],
@@ -1090,3 +1090,13 @@ INSERT INTO [DataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH] (
 	[ROLE],
 	jpetl_id
 FROM [tmpDataRecordPRESENT_EDUCATIONALPRESENT_EDUCATIONAL_AUTH];
+
+INSERT INTO [DataRecordPRESENT_EDUCATIONALMISSION] (
+	jpetl_idfk,
+	[MISSION],
+	jpetl_id
+) SELECT
+	jpetl_idfk,
+	[MISSION],
+	jpetl_id
+FROM [tmpDataRecordPRESENT_EDUCATIONALMISSION];
